@@ -1,6 +1,11 @@
 package ru.avalon.java.tcp;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
@@ -11,6 +16,9 @@ import java.net.SocketAddress;
  * @author Daniel Alpatov
  */
 public final class TcpSender {
+    
+  
+    private static BufferedReader reader;
 
     public static void main(String[] args) throws IOException {
         // 1. Подготавливааем сообщение
@@ -30,11 +38,8 @@ public final class TcpSender {
      *
      * @return текстовое сообщение.
      */
-    private static String prepareMessage() {
-        /*
-         * TODO Реализовать метод prepareMessage класса TcpSender
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+    private static String prepareMessage() throws IOException {
+        return new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 
     /**
@@ -60,10 +65,7 @@ public final class TcpSender {
      * @throws IOException
      */
     private static Socket connect(SocketAddress address) throws IOException {
-        /*
-         * TODO Реализовать метод connect класса TcpSender
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+
     }
 
     /**
@@ -75,10 +77,14 @@ public final class TcpSender {
      * @throws IOException
      */
     private static void send(Socket socket, String message) throws IOException {
-        /*
-         * TODO Реализовать метод send класса TcpSender
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        byte[] data = message.getBytes();
+        try {
+            OutputStream stream = socket.getOutputStream();
+            stream.write(data);
+            stream.flush(); 
+        } catch (IOException ex) {
+            ex.printStackTrace(System.err);
+        }
     }
 
 }
