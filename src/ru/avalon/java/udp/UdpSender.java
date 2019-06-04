@@ -1,9 +1,14 @@
 package ru.avalon.java.udp;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.net.UnknownHostException;
 
 /**
  * Упражнение, направленное на выработку умений, связанных
@@ -35,11 +40,9 @@ public final class UdpSender {
      *
      * @return текстовое сообщение.
      */
-    private static String prepareMessage() {
-        /*
-         * TODO Реализовать метод prepareMessage класса UdpSender
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+    private static String prepareMessage() throws IOException {
+        return new BufferedReader(new InputStreamReader(System.in)).readLine();
+
     }
 
     /**
@@ -47,11 +50,9 @@ public final class UdpSender {
      *
      * @return адрес конечной точки.
      */
-    private static SocketAddress prepareAddress() {
-        /*
-         * TODO Реализовать метод prepareAddress класса UdpSender
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+    private static SocketAddress prepareAddress() throws UnknownHostException {
+        InetAddress address = InetAddress.getLocalHost();
+        return new InetSocketAddress(address, 0);
     }
 
     /**
@@ -61,10 +62,8 @@ public final class UdpSender {
      * @throws IOException
      */
     private static DatagramSocket createSocket() throws IOException {
-        /*
-         * TODO Реализовать метод createSocket класса UdpSender
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return new DatagramSocket();
+
     }
 
     /**
@@ -75,10 +74,7 @@ public final class UdpSender {
      * @return экземпляр типа {@link DatagramPacket}.
      */
     private static DatagramPacket pack(String message) {
-        /*
-         * TODO Реализовать метод pack класса UdpSender
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+         return new DatagramPacket(message.getBytes(), message.getBytes().length);
     }
 
 }
